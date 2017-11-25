@@ -12,13 +12,13 @@ func sendMessage(message string) error {
 	serverIP := "127.0.0.1"
 	serverPort := "45455"
 
-	serverAddr, err := net.ResolveTCPAddr("tcp", serverIP + ":" + serverPort)
+	serverAddr, err := net.ResolveTCPAddr("tcp", serverIP+":"+serverPort)
 	if err != nil {
-    return err
+		return err
 	}
 	conn, err := net.DialTCP("tcp", nil, serverAddr)
 	if err != nil {
-    return err
+		return err
 	}
 	defer conn.Close()
 
@@ -29,11 +29,11 @@ func sendMessage(message string) error {
 	conn.SetReadDeadline(time.Now().Add(10 * time.Second))
 	readlen, err := conn.Read(readBuf)
 	if err != nil {
-    return err
+		return err
 	}
 
 	fmt.Println("server: " + string(readBuf[:readlen]))
-  return nil
+	return nil
 }
 
 func main() {
